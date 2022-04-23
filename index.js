@@ -6,6 +6,10 @@ export default (req, res) => {
   const { searchParams } = new URL(req.url, baseURL)
   const name = searchParams.get("name")
 
+  if (req.method !== 'GET') {
+    return send(res, 405)
+  }
+
   if (name) {
     return send(res, 200, `Hello, ${name}!`)
   }
