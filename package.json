@@ -8,6 +8,10 @@
   },
   "author": "felubra",
   "license": "ISC",
+  "scripts": {
+    "start": "micro",
+    "dev": "micro-dev"
+  },
   "devDependencies": {
     "micro-dev": "^3.0.0"
   },
