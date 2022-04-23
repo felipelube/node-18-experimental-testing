@@ -41,4 +41,3 @@ it('should not accept other methods than `GET`', async () => {
   const res = await fetchService("/", { method: 'POST' })
   assert.strictEqual(res.status, 405)
 })
-it('should not accept empty `name` query param', { todo: true })
