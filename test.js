@@ -1,8 +1,23 @@
 import test from 'node:test'
+import assert from 'assert'
+
+import listen from 'test-listen'
+import micro from 'micro'
+
+import service from './index.js'
 
 const it = test
 
-it('should give a 200 OK response', { todo: true })
+it('should give a 200 OK response in the `/` path', async t => {
+  const microService = micro(service)
+
+  const testURL = await listen(microService)
+  const res = await fetch(testURL)
+
+  assert.strictEqual(res.status, 200)
+  microService.close()
+})
+
 it('should output `hello world` message in the `/` path', { todo: true })
 it('should output `hello {name}` on the `/?q={name}` URL', { todo: true })
 
