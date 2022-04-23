@@ -31,7 +31,11 @@ it('should output `Hello, world!` message in the `/` path', async (t) => {
   assert.strictEqual(body, "Hello, world!")
 })
 
-it('should output `hello {name}` on the `/?q={name}` URL', { todo: true })
+it('should output `hello {name}` on the `/?name={name}` URL', async (t) => {
+  const res = await fetchService("/?name=Felipe")
+  const body = await res.text()
+  assert.strictEqual(body, "Hello, Felipe!")
+})
 
 it('should not accept other methods than `GET`', { todo: true })
 it('should not accept empty `name` query param', { todo: true })
