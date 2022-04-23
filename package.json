@@ -6,6 +6,7 @@
   "scripts": {
     "test": "test.js"
   },
+  "type": "module",
   "engines" : { 
     "npm" : ">=8.6.0",
     "node" : ">=18.0.0"
