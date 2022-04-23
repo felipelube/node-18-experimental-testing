@@ -18,7 +18,17 @@ it('should give a 200 OK response in the `/` path', async t => {
   microService.close()
 })
 
-it('should output `hello world` message in the `/` path', { todo: true })
+it('should output `Hello, world!` message in the `/` path', async (t) => {
+  const microService = micro(service)
+
+  const testURL = await listen(microService)
+  const res = await fetch(testURL)
+  const body = await res.text()
+
+  assert.strictEqual(body, "Hello, world!")
+  microService.close()
+})
+
 it('should output `hello {name}` on the `/?q={name}` URL', { todo: true })
 
 it('should not accept other methods than `GET`', { todo: true })
