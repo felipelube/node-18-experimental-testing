@@ -8,25 +8,26 @@ import service from './index.js'
 
 const it = test
 
-it('should give a 200 OK response in the `/` path', async t => {
+const fetchService = async () => {
   const microService = micro(service)
+  try {
+    const testURL = await listen(microService)
+    const res = await fetch(testURL)
+    return res
+  } finally {
+    microService.close()
+  }
+}
 
-  const testURL = await listen(microService)
-  const res = await fetch(testURL)
-
+it('should give a 200 OK response in the `/` path', async t => {
+  const res = await fetchService()
   assert.strictEqual(res.status, 200)
-  microService.close()
 })
 
 it('should output `Hello, world!` message in the `/` path', async (t) => {
-  const microService = micro(service)
-
-  const testURL = await listen(microService)
-  const res = await fetch(testURL)
+  const res = await fetchService()
   const body = await res.text()
-
   assert.strictEqual(body, "Hello, world!")
-  microService.close()
 })
 
 it('should output `hello {name}` on the `/?q={name}` URL', { todo: true })
