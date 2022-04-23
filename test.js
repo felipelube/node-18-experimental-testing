@@ -9,11 +9,11 @@ import service from './index.js'
 
 const it = test
 
-const fetchService = async (path = '/') => {
+const fetchService = async (path = '/', fetchOptions = {}) => {
   const microService = micro(service)
   try {
     const testURL = new URL(path, await listen(microService))
-    const res = await fetch(testURL.toString())
+    const res = await fetch(testURL.toString(), fetchOptions)
     return res
   } finally {
     microService.close()
